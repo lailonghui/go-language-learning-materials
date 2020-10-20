@@ -3,8 +3,12 @@ learning golang,postgres and more
 
 
 
-```sh
-PostgreSQL阿里课程： https://edu.aliyun.com/lesson_52_1755spm=5176.10731542.0.0.148a3b1840OD2B#_1755
+```json
+github使用文档:
+https://docs.github.com/cn/free-pro-team@latest/github
+
+PostgreSQL阿里课程： 
+https://edu.aliyun.com/lesson_52_1755spm=5176.10731542.0.0.148a3b1840OD2B#_1755
 
 go语言实战: pdf
 
