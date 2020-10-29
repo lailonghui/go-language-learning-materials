@@ -1,6 +1,4 @@
-# PG通过日期进行数据库列表分区
-
- PostgreSQL 支持范围分区(RANGE)、列表分区(LIST)、哈希分区(HASH)三种分区方式 
+# PG通过继承进行数据库分区 
 
 ### 1.创建分区主表 partition_test
 
