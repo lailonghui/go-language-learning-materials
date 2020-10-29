@@ -74,7 +74,7 @@ CREATE TABLE partition_test_all
 ); 
 ```
 
-### 4.向不分区主表 partition_test_all 中插入3亿条数据
+### 4.向不分区主表 partition_test_all 中插入1亿条数据
 
 ```sql
 INSERT INTO partition_test_all  
@@ -89,7 +89,7 @@ select
     floor(random()*20)+1 as account,  
     floor(random()*10000)+1 as expense  
 from  
-    generate_series(1,200000000,1);  
+    generate_series(1,100000000,1);  
 ```
 
 ### 5.插入同样的测试数据到分区主表 partition_test
@@ -114,8 +114,9 @@ from
         date_key = date '2020-10-1'  
     group by 1  
     )foo;
-Execution Time: 5886.726 ms
- 
+Execution Time: 4919.409 ms(2亿条数据)
+Execution Time: 5886.726 ms(3亿条数据)
+
 ```
 
 ### 7.partition_test_all查询2020-10-1日**不同client_key的平均消费额** 。
@@ -134,6 +135,9 @@ from
         date_key = date '2020-10-1'  
     group by 1  
     )foo; 
-Execution Time: 62354.137 ms
+Execution Time: 44579.715 ms(2亿条数据)
+Execution Time: 62354.137 ms(3亿条数据)
+Execution Time: 87135.520 ms(4亿条数据)
+
 ```
 
