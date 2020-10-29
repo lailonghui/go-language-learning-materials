@@ -1,4 +1,6 @@
-# PG通过继承进行数据库分区 
+# PG数据库分区实现方式一 
+
+##### 原理: 通过INHERITS(继承)的方式，在父表上挂载触发器，在找不到子表时动态创建表，目前根据时间分区，一天分一张表。
 
 ### 1.创建分区主表 partition_test
 
@@ -72,7 +74,7 @@ CREATE TABLE partition_test_all
 ); 
 ```
 
-### 4.向不分区主表 partition_test_all 中插入一亿条数据
+### 4.向不分区主表 partition_test_all 中插入2亿条数据
 
 ```sql
 INSERT INTO partition_test_all  
@@ -87,7 +89,7 @@ select
     floor(random()*20)+1 as account,  
     floor(random()*10000)+1 as expense  
 from  
-    generate_series(1,100000000,1);  
+    generate_series(1,200000000,1);  
 ```
 
 ### 5.插入同样的测试数据到分区主表 partition_test
@@ -96,19 +98,42 @@ from
 INSERT INTO partition_test SELECT * FROM partition_test_all;  
 ```
 
-### 6.partition_test查询2020-10-1日所有数据。
+### 6.partition_test查询2020-10-1日**不同client_key的平均消费额** 。
 
 ```sql
-
- select  * from partition_test_all where date_key = date '2020-10-1'
- result: 2 secs 431 msec
+explain analyze
+select
+    avg(expense)  
+from  
+    (select  
+        client_key,  
+        sum(expense) as expense  
+    from  
+        partition_test
+    where  
+        date_key = date '2020-10-1'  
+    group by 1  
+    )foo;
+ Execution Time: 4919.409 ms
  
 ```
 
-### 7.partition_test_all查询2020-10-1日所有数据。
+### 7.partition_test_all查询2020-10-1日**不同client_key的平均消费额** 。
 
 ```sql
-select  * from partition_test_all where date_key = date '2020-10-1'  
-result: 5 secs 258 msec。
+explain analyze
+select
+    avg(expense)  
+from  
+    (select  
+        client_key,  
+        sum(expense) as expense  
+    from  
+        partition_test_all
+    where  
+        date_key = date '2020-10-1'  
+    group by 1  
+    )foo; 
+Execution Time: 44579.715 ms
 ```
 
