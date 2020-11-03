@@ -29,6 +29,7 @@ https://postgis.net/
 
 gin全局统一错误处理：https://zhuanlan.zhihu.com/p/76967528
 输入表单校验:https://github.com/go-playground/validator
+go使用日志：https://github.com/uber-go/zap
 
 postgres查看数据库各个表占用的磁盘空间:
 SELECT
