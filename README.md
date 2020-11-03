@@ -27,6 +27,8 @@ https://gqlgen.com/
 postgis:空间数据库
 https://postgis.net/
 
+gin全局统一错误处理：https://zhuanlan.zhihu.com/p/76967528
+输入表单校验:https://github.com/go-playground/validator
 
 postgres查看数据库各个表占用的磁盘空间:
 SELECT
