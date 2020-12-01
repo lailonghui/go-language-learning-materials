@@ -33,5 +33,7 @@ go使用日志：https://github.com/uber-go/zap
 
 
 Docker — 从入门到实践: https://www.gobeta.net/books/docker_practice/readme/
+Linux就该这么学:http://c.biancheng.net/linux_tutorial/10/
+Shell脚本: http://c.biancheng.net/shell/
 ```
 
