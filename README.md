@@ -31,13 +31,7 @@ gin全局统一错误处理：https://zhuanlan.zhihu.com/p/76967528
 输入表单校验:https://github.com/go-playground/validator
 go使用日志：https://github.com/uber-go/zap
 
-postgres查看数据库各个表占用的磁盘空间:
-SELECT
-    table_schema || '.' || table_name AS table_full_name,
-    pg_size_pretty(pg_total_relation_size('"' || table_schema || '"."' || table_name || '"')) AS size
-FROM information_schema.tables
-ORDER BY
-    pg_total_relation_size('"' || table_schema || '"."' || table_name || '"') DESC
 
+Docker — 从入门到实践: https://www.gobeta.net/books/docker_practice/readme/
 ```
 
